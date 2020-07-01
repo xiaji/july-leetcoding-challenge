@@ -1,2 +1,3 @@
 # july-leetcoding-challenge
-Leetcode Challenge in July
+This is a coding repo for Leetcode Challenge in July
+https://leetcode.com/explore/challenge/card/july-leetcoding-challenge/
