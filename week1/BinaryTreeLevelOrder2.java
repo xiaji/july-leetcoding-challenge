@@ -20,7 +20,7 @@ import javax.swing.tree.TreeNode;
  * this.val = val; 
  * this.left = left; this.right = right; } }
  */
-
+// BFS 
 public class BinaryTreeLevelOrder2 {
   public List<List<Integer>> levelOrderBottom(TreeNode root) {
     List<List<Integer>> res = new ArrayList<>();
@@ -47,8 +47,17 @@ public class BinaryTreeLevelOrder2 {
         }
       }
       // this is a mistake, reference problem
+      // the final res is the same 
       res.add(temp);
     }
     return Collections.reverse(res);
+  }
+
+  //DFS
+  public List<List<Integer>> levelOrderBottomDFS(TreeNode root) {
+    List<List<Integer>> res = new ArrayList<>();
+    if (root == null) {
+      return res;
+    }
   }
 }
