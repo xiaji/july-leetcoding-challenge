@@ -1,5 +1,9 @@
 package week1;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 第一反应是可能需要bit的操作，但是自己不会，所以这个就是盲点，需要补齐。
  * 要解决问题就是从最简单的开始 完全按照题目模拟，O(n)
@@ -41,5 +45,41 @@ public class PrisonCells {
       newArr = 1 - oldArr;
     }
     return copyCells[oldArr];  
+  }
+
+  /**
+   * 实验一下用hashmap
+   * 错误 进行不下去了 并不是进行不下去
+   * 而是还需要重新再计算一遍
+   */
+  public int[] prisonAfterNDays2(int[] cells, int N) {
+    if (cells == null || cells.length < 8 || N < 1) {
+      return new int[0];
+    }
+    Map<String, Integer> cellToDay = new HashMap<>();
+    int[][] copyCells = new int[2][8];
+    int cnt = 0, oldArr = 0, newArr = 1;
+    copyCells[0] = cells.clone();
+    String temp;
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < 8; j++) {
+        if (j == 0 || j == 7) {
+          copyCells[newArr][j] = 0;
+        }
+        copyCells[newArr][j] = copyCells[oldArr][j - 1] == copyCells[oldArr][j + 1] ? 1 : 0;
+      }
+      temp = Arrays.toString(copyCells[newArr]);
+      if (cellToDay.containsKey(temp)) {
+        break;
+      }
+      cellToDay.put(temp, i);
+      cnt++;
+      oldArr = newArr;
+      newArr = 1 - oldArr;
+    }
+    return copyCells[oldArr]; 
+  }
+
+  public int[] prisonAfterNDays3(int[] cells, int N) {
   }
 }
