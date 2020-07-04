@@ -81,5 +81,35 @@ public class PrisonCells {
   }
 
   public int[] prisonAfterNDays3(int[] cells, int N) {
+    if (cells == null || cells.length < 8 || N < 1) {
+      return new int[0];
+    }
+    Map<Integer, int[]> cellToDay = new HashMap<>();
+    int[][] copyCells = new int[2][8];
+    int cnt = 0, oldFlag = 0, newFlag = 1;
+    copyCells[0] = cells.clone();
+    iterate(copyCells, oldFlag, newFlag);
+    cellToDay.put(cnt++, copyCells[newFlag]);
+    int[] temp = copyCells[newFlag];
+    for (int i = 1; i < N; i++) {
+      oldFlag = newFlag;
+      newFlag = 1 - oldFlag;
+      iterate(copyCells, oldFlag, newFlag);
+      if (Arrays.equals(copyCells[newFlag], temp)) {
+        break;
+      }
+      cellToDay.put(i, copyCells[newFlag]);
+      cnt++;
+    }
+    return cnt == N ? copyCells[newFlag] : cellToDay.get(N % cnt);
+  }
+
+  private void iterate(int[][] nums, int oldFlag, int newFlag) {
+    for (int j = 0; j < 8; j++) {
+      if (j == 0 || j == 7) {
+        nums[newFlag][j] = 0;
+      }
+      nums[newFlag][j] = nums[oldFlag][j - 1] == nums[oldFlag][j + 1] ? 1 : 0;
+    }
   }
 }
