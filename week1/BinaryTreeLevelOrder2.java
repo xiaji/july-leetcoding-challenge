@@ -59,5 +59,6 @@ public class BinaryTreeLevelOrder2 {
     if (root == null) {
       return res;
     }
+    
   }
 }
