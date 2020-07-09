@@ -26,11 +26,13 @@ public class 3Sum {
     int left = start, right = end;
     while (left < right) {
       // 不能放在最后，再right--，逻辑上不对，先做这个，再判断其他情况
-      while (nums[left] + nums[right] < target) {
+      // mistake1: left < right!!! indexofbound
+      while (left && right && nums[left] + nums[right] < target) {
         left++;
       }
-
-      if (nums[left] + nums[right] == target) {
+      // mistake1: left < right case:[-1, 0, 1, 2, -1, -4]
+      // without left < right, wrong res:[-4,2,2] left == right
+      if (left < right && nums[left] + nums[right] == target) {
         List<Integer> temp = new ArrayList<>();
         temp.add(-target);
         temp.add(nums[left]);
