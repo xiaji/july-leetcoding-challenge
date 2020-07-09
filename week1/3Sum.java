@@ -13,6 +13,10 @@ public class 3Sum {
     int size = nums.length;
     Arrays.sort(nums);
     for (int i = 0; i < size - 2; ++i) {
+      //duplicates
+      if (i > 0 && nums[i - 1] == nums[i]) {
+        continue;
+      }
       helper(-nums[i], nums, i + 1, size - 1, res);
     }
     return res;   
@@ -21,6 +25,11 @@ public class 3Sum {
   private void helper(int target, int[] nums, int start, int end, List<List<Integer>> res) {
     int left = start, right = end;
     while (left < right) {
+      // 不能放在最后，再right--，逻辑上不对，先做这个，再判断其他情况
+      while (nums[left] + nums[right] < target) {
+        left++;
+      }
+
       if (nums[left] + nums[right] == target) {
         List<Integer> temp = new ArrayList<>();
         temp.add(-target);
@@ -31,14 +40,15 @@ public class 3Sum {
           right--;
         }
       }
-
+      right--;
+      /* 可以更简单点
       if (nums[left] + nums[right] < target) {
         left++;
       }
       
       if (nums[left] + nums[right] > target) {
         right--;
-      }
+      }*/
     }
   }
 }
