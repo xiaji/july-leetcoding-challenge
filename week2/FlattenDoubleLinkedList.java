@@ -27,7 +27,9 @@ public class FlattenDoubleLinkedList {
       if (curr.next != null) {
         curr.next.prev = temp;
       }
+      // forget the child node's prev
       curr.next = curr.child;
+      curr.child.prev = curr;
       curr.child = null;
       curr = curr.next;
     }
