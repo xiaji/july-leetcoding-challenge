@@ -16,6 +16,23 @@ public class ReverseBits {
     }
     return (int)res;    
   }
+  // another wrong ans
+  /**
+   * wrong case 11111111111111111111111111111101 
+   * Output: 3221225469
+   * (10111111111111111111111111111101) 
+   * Expected: 3221225471
+   * (10111111111111111111111111111111)
+   * time limited
+   */
+  private int reverseBitsWrongLeet(int n) {
+    int res = 0, power = 31;
+    while (n != 0) {
+      res += (n & 1) << power;
+      n >>= 1;
+      power--;
+    }
+  }
 
   public int reverseBits(int n) {
     int res = 0;
