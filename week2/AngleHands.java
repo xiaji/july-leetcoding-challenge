@@ -23,4 +23,19 @@ public class AngleHands {
     double res = Math.abs(hourTotal - minTotal) * degree;
     return Math.min(res, 360.0 - res);
   }
+  // leetcode 详解
+  // 1. 从我的思路来看 要经过一次换算 那就直接把angle和hour，min对应起来
+  // 360/60 = 6 angle/min 360/12 = 30 angle/h
+  // 2. 在第一次错误的计算下，思考过如果hour == 12，int hour = hour == 12 ? 0 : hour
+  // 这个就等价于对hour进行取模操作 hour % 12
+  public double angleClock2(int hour, int minutes) {
+    int oneMinAngle = 6;
+    int oneHourAngle = 30;
+
+    double minutesAngle = oneMinAngle * minutes;
+    double hourAngle = (hour % 12 + minutes / 60.0) * oneHourAngle;
+
+    double diff = Math.abs(hourAngle - minutesAngle);
+    return Math.min(diff, 360.0 - diff);
+  }
 }
