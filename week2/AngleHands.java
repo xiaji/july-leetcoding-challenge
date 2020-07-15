@@ -13,9 +13,11 @@ public class AngleHands {
     }
     double hourUnit = 0.2, minUnit = 1.0, degree = 6.0;
     // mistake 1: hour / hourunit
-    double hourTotal = (hour + minutes / 60.0) * hourUnit;
+    // double hourTotal = (hour + minutes / 60.0) * hourUnit;
+    double hourTotal = (hour + minutes / 60.0) / hourUnit;
     // mistake 2: min / minunit
-    double minTotal = minUnit * minutes;
+    // double minTotal = minUnit * minutes;
+    double minTotal = minutes / minUnit;
     double res = Math.abs(hourTotal - minTotal) * degree;
     return Math.min(res, 360.0 - res);
   }
