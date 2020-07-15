@@ -5,6 +5,8 @@ package week2;
  * 分针所对应的是1min/unit
  * 度数是6angle/unit
  * 需要注意的是要用double做类型
+ * 单位都是xx/格 所以要用格来比的话 就得用除法 算出对应的格数
+ * 之后再于每格所对应的度数相乘
  */
 public class AngleHands {
   public double angleClock(int hour, int minutes) {
