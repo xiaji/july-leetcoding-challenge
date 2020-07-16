@@ -12,14 +12,16 @@ public class ReverseWords {
     int index = ss.length - 1;
     //StringBuilder 线程不安全
     StringBuffer sb = new StringBuffer();
+    // mistake 1: index-- 
     while (index >= 0) {
       if (ss[index].isEmpty()) {
+        index--;
         continue;
       }
       if (sb.length() > 0) {
         sb.append(" ");
       }
-      sb.append(ss[index]);
+      sb.append(ss[index--]);
     }
     return sb.toString();
   }
