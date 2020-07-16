@@ -2,6 +2,8 @@ package week3;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -56,24 +58,28 @@ public class ReverseWords {
         continue;
       }
       j = i + 1;
-      while (j < size) {
+      while (j < size && chs[j] != ' ') {
+        j++;
+      }
+     /*while (j < size) {
         // 死循环
-        /*if (chs[j] != ' ') {
+        /if (chs[j] != ' ') {
           j++;
           continue;
-        }*/
+        }/
         if (chs[j] == ' ') {
           break;
         }
         j++;
-      }
+      }*/
       if (sb.length() > 0) {
         sb.append(" ");
       }
       appendString(sb, chs, j - 1, i);
       // 把chs全部转换成string 直接出错
       // sb.append(reverseString(chs, i, j - 1));
-      i = j;
+      // i = j + 1, chs[j] = ' '
+      i = j + 1;
     }
     return sb.toString();
   }
@@ -112,5 +118,47 @@ public class ReverseWords {
       chs[left++] = temp;
     }
     return chs;
+  }
+
+  /**
+   * 第三个方法用Deque做，直接把word插在最前面
+   * 为什么不用linkedlist或者arraylist 原因就是时间复杂度 
+   * ArrayList.add(int index, E e) O(n)
+   * LinkedList.add(int index, E e) mid O(n) tail/head o(1)
+   */
+  public String reverseWords3(String s) {
+    if (s == null || s.isEmpty()) {
+      return "";
+    }
+    int left = 0, right = s.length() - 1;
+    char[] chs = s.toCharArray();
+    while (left <= right && chs[left] == ' ') {
+      left++;
+    }
+    
+    while (left <= right && chs[right] == ' ') {
+      right--;
+    }
+
+    StringBuffer word = new StringBuffer();
+    Deque<String> dequeq = new LinkedList<>();
+    char temp = ' ';
+    // 不管上面的left <= right是否有等号，这里这个条件是必须要有的
+    // 很可能这里left == right，如果没有=，最后的结果可能是什么都没有
+    // 或者少最后一个字母，因为right是可以取的，且非空。
+    while (left <= right) {
+      temp = chs[left];
+      // 这个循环把word长度为0，且temp为空的情况下就什么都不做，left++即可
+      if (word.length() != 0 && temp == ' ') {
+        dequeq.addFirst(word.toString());
+        word.setLength(0);
+      } else if (temp != ' ') {
+        word.append(temp);
+      }
+      left++;
+    }
+
+    dequeq.addFirst(word.toString());
+    return String.join(" ", dequeq);
   }
 }
