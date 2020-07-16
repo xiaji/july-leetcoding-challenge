@@ -46,11 +46,54 @@ public class ReverseWords {
     if (s == null || s.isEmpty()) {
       return "";
     }
+    //s = reverseString(s.toCharArray(), 0, s.length() - 1);
+    int size = s.length(), i = 0, j = 0;
     char[] chs = reverseString(s);
-    int left = 0, right = chs.length - 1;
-    while (left < right) {
-      
+    StringBuffer sb = new StringBuffer();
+    while (i < size) {
+      if (chs[i] == ' ') {
+        i++;
+        continue;
+      }
+      j = i + 1;
+      while (j < size) {
+        // 死循环
+        /*if (chs[j] != ' ') {
+          j++;
+          continue;
+        }*/
+        if (chs[j] == ' ') {
+          break;
+        }
+        j++;
+      }
+      if (sb.length() > 0) {
+        sb.append(" ");
+      }
+      appendString(sb, chs, j - 1, i);
+      // 把chs全部转换成string 直接出错
+      // sb.append(reverseString(chs, i, j - 1));
+      i = j;
     }
+    return sb.toString();
+  }
+
+  private void appendString(StringBuffer sb, char[] chs, int start, int end) {
+    for (int i = start; i >= end; --i) {
+      sb.append(chs[i]);
+    }
+  }
+
+  private String reverseString(char[] chs, int start, int end) {
+    int left = start, right = end;
+    //char[] chs = s.toCharArray();
+    char temp = '0';
+    while (left < right) {
+      temp = chs[right];
+      chs[right--] = chs[left];
+      chs[left++] = temp;
+    }
+    return new String(chs);
   }
 
   private char[] reverseString(String s) {
