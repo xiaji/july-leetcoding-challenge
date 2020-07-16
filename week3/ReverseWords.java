@@ -161,4 +161,25 @@ public class ReverseWords {
     dequeq.addFirst(word.toString());
     return String.join(" ", dequeq);
   }
-}
+
+  private StringBuffer trimSpace(String s) {
+    int left = 0, right = s.length() - 1;
+    char[] chs = s.toCharArray();
+    while (left <= right && chs[left] == ' ') {
+      left++;
+    }
+    while (left <= right && chs[right] == ' ') {
+      right--;
+    }
+    StringBuffer sb = new StringBuffer();
+    while (left <= right) {
+      if (chs[left] != ' ') {
+        sb.append(chs[left]);
+      } else if (chs[left] == ' ' && chs[left - 1] != ' ') {
+        sb.append(' ');
+      }
+      left++;
+    }
+    return sb;
+  }
+ }
