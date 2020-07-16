@@ -172,11 +172,13 @@ public class ReverseWords {
       right--;
     }
     StringBuffer sb = new StringBuffer();
+    char temp = ' ';
     while (left <= right) {
-      if (chs[left] != ' ') {
-        sb.append(chs[left]);
-      } else if (chs[left] == ' ' && chs[left - 1] != ' ') {
-        sb.append(' ');
+      temp = chs[left];
+      if (temp != ' ') {
+        sb.append(temp);
+      } else if (temp == ' ' && chs[left - 1] != ' ') {
+        sb.append(temp);
       }
       left++;
     }
