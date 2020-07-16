@@ -84,6 +84,12 @@ public class ReverseWords {
     }
   }
 
+  // mistake: only reverse chs from start to end, and exchange to string
+  // what the method does is that change all chs to string
+  // it is wrong
+  // what we can fix: create a stringbuffer to create a new string
+  // but it will cost more space
+  // so I create a new method-appendString, stringbuffer is an argument 
   private String reverseString(char[] chs, int start, int end) {
     int left = start, right = end;
     //char[] chs = s.toCharArray();
