@@ -4,11 +4,12 @@ package week3;
  * 快速幂问题 logN做法
  * 这次是double类型
  * 需要注意的点是 1.n为负数 尤其是2的31次方 如果直接对n取相反数直接就越界了 2.循环和递归做法
+ * 应该记住的技巧，为了避免1的取相反数越界情况，把所有的负数的相反数都 + 1，最后再乘起来
  */
 
 public class Power {
   public double myPow(double x, int n) {
-    int newN = 0;
+    int newN = n;
     if (n < 0) {
       x = 1.0 / x;
       if (n == Integer.MIN_VALUE) {
@@ -21,6 +22,8 @@ public class Power {
   }
 
   private double helper(double x, int n) {
+    // mistake: one condition n == 1
+    // or result would be 1.0 always
     if (n == 0) {
       return 1.0;
     }
@@ -30,5 +33,22 @@ public class Power {
       return temp;
     }
     return temp * x;
+  }
+
+  // recursion: better way
+  public double myPow2(double x, int n) {
+    if (n == 1) {
+      return x;
+    }
+    if (n == 0) {
+      return 1.0;
+    }
+    double temp = myPow(x, n / 2);
+    if (n % 2 == 0) {
+      return temp * temp;
+    } else if (n % 2 == 1) {
+      return temp * temp * x;
+    }
+    return temp * temp / x;
   }
 }
