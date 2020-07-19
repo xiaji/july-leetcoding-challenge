@@ -16,11 +16,16 @@ import java.util.PriorityQueue;
  * 错误1:想直接用Map作为Heap的比较单位，写不出来，为什么？其实可以Integer对比，其实自己也是这么想的
  * 但是比较的时候，借用map，比较其对应的val的值，这样就可以了，要重新写comparator。
  * heap的那节忘记了，不扎实，要重新看视频。
+ * 3.如果是是实时的怎么写？Bloomberg filter 怎么写？怎么实现
  */
 public class TopKFrequent {
   public int[] topKFrequent(int[] nums, int k) {
     if (nums == null || nums.length == 0 || k < 1) {
       return new int[0];
+    }
+    // add this conditon
+    if (nums.length == k) {
+      return nums;
     }
     // List<Integer> res = new ArrayList<>();
     Map<Integer, Integer> numToFrequent = new HashMap<>();
@@ -33,11 +38,11 @@ public class TopKFrequent {
         return numToFrequent.get(a) < numToFrequent.get(b) ? -1 : 1;
       }
     });
-    int frq = 0;
+    // int frq = 0;
     for (int num : nums) {
-      frq = numToFrequent.getOrDefault(num, 0);
+      // frq = numToFrequent.getOrDefault(num, 0);
       // numToFrequent.putIfAbsent(num, value);
-      numToFrequent.put(num, frq + 1);
+      numToFrequent.put(num, numToFrequent.getOrDefault(num, 0) + 1);
     }
     
     for (int key : numToFrequent.keySet()) {
