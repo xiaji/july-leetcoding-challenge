@@ -11,6 +11,10 @@ import java.util.Queue;
  * topo排序
  * 问题在1.隐式图的处理 用什么样的数据结构来存储 里面有技巧 自己有总结过 不复习就忘了
  * 2.topo排序用BFS还是DFS
+ * 这个题目存入度的时候，直接用数组，因为course是0到n-1。这就是刷题或者做竞赛的直接，最简单直接
+ * 从space到时间复杂度都节省
+ * List<Integer>[] graph = new ArrayList<>[];
+ * 这个并不会报错 可以运行 但是不是很合适 用List嵌套可能更好
  */
 public class CourseSchedule {
   public int[] findOrder(int numCourses, int[][] prerequisites) {
@@ -21,7 +25,7 @@ public class CourseSchedule {
 
     // missing one condition, no need for numCourses > 1 && no pre condition
     int[] res = new int[numCourses];
-    //这样会出现错误 没有范型数组
+    //这样会出现错误 没有范型数组 需要自己再去确实
     //List<Integer>[] graph = new ArrayList<>[numCourses];
     List<List<Integer>> graph = new ArrayList<>();
     // 因为直接是index->course->indegree
