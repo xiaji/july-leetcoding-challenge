@@ -9,6 +9,13 @@ import javax.swing.tree.TreeNode;
 
 /**
  * 分层遍历 BFS 基本操作
+ * 1.只写了基本的 题意没弄懂
+ * 2.自己想的zig zag直接是另一个逻辑下的，实际上并不是把把整个层reverse
+ *      1     按照我的第二版代码的逻辑 结果会是1,32,564
+ *    /   \
+ *   2     3
+ *  /     / \
+ * 4     5   6
  */
 public class BinaryTreeZigZag {
   public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
@@ -19,13 +26,24 @@ public class BinaryTreeZigZag {
     Queue<TreeNode> queue = new LinkedList<>();
     queue.offer(root);
     int size = 0;
+    boolean flag = false;
     TreeNode temp = new TreeNode();
     while (!queue.isEmpty()) {
       size = queue.size();
       List<Integer> level = new ArrayList<>();
+      flag = !flag;
       while (size-- != 0) {
         temp = queue.poll();
         level.add(temp.val);
+        if (flag) {
+          if (temp.right != null) {
+            queue.offer(temp.right);
+          }
+          if (temp.left != null) {
+            queue.offer(temp.left);
+          }
+          continue;
+        }
         if (temp.left != null) {
           queue.offer(temp.left);
         }
@@ -37,4 +55,6 @@ public class BinaryTreeZigZag {
     }
     return res;    
   }
+
+  private void order(Queue<TreeNode> queue, TreeNode node, )
 }
