@@ -1,6 +1,7 @@
 package week4;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -31,10 +32,10 @@ public class BinaryTreeZigZag {
     while (!queue.isEmpty()) {
       size = queue.size();
       List<Integer> level = new ArrayList<>();
-      flag = !flag;
       while (size-- != 0) {
         temp = queue.poll();
         level.add(temp.val);
+        /* wrong version
         if (flag) {
           if (temp.right != null) {
             queue.offer(temp.right);
@@ -43,7 +44,7 @@ public class BinaryTreeZigZag {
             queue.offer(temp.left);
           }
           continue;
-        }
+        }*/
         if (temp.left != null) {
           queue.offer(temp.left);
         }
@@ -51,10 +52,12 @@ public class BinaryTreeZigZag {
           queue.offer(temp.right);
         }
       }
+      if (flag) {
+        Collections.reverse(level);
+      }
+      flag = !flag;
       res.add(level);
     }
     return res;    
   }
-
-  private void order(Queue<TreeNode> queue, TreeNode node, )
 }
