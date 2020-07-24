@@ -8,6 +8,10 @@ import java.util.Set;
  * 用set做，碰到一样的直接删除
  * 最后的答案就是了
  * https://docs.oracle.com/javase/8/docs/api/java/util/Set.html
+ * toArray()返回 或者是带参数的必须是对象 而不能是int类型
+ * toArray()返回的是Object类型
+ * 要指定类型要使用toArray(new Integer[0]) 0没有关系 数组会自动allocated
+ * 如果知道大小 还是指定size
  */
 public class SingleNum3 {
   public int[] singleNumber(int[] nums) {
