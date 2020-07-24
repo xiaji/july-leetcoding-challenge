@@ -25,6 +25,16 @@ public class SingleNum3 {
       }
       set.remove(num);
     }
-    return set.toArray();
+    // hashmap的操作
+    // for (Map.Entry<Integer, Integer> item : hashmap.entrySet())
+    // if (item.getValue() == 1) output[idx++] = item.getKey();
+    // new Integer[0] also works
+    Integer[] temp = set.toArray(new Integer[2]);
+    int[] res = new int[2];
+    int idx = 0;
+    for (int num : set) {
+      res[idx++] = num;
+    }
+    return res;
   }
 }
