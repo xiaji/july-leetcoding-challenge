@@ -1,5 +1,26 @@
 package week4;
 
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * 第一直觉，做过类似的，但是忘记题目编号了。
+ * 用set做，碰到一样的直接删除
+ * 最后的答案就是了
+ * https://docs.oracle.com/javase/8/docs/api/java/util/Set.html
+ */
 public class SingleNum3 {
-  
+  public int[] singleNumber(int[] nums) {
+    if (nums == null || nums.length < 2) {
+      return new int[0];
+    }
+    Set<Integer> set = new HashSet<>();
+    for (int num : nums) {
+      if (set.add(num)) {
+        continue;
+      }
+      set.remove(num);
+    }
+    return set.toArray();
+  }
 }
