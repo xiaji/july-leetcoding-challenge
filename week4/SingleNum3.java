@@ -7,11 +7,14 @@ import java.util.Set;
  * 第一直觉，做过类似的，但是忘记题目编号了。
  * 用set做，碰到一样的直接删除
  * 最后的答案就是了
- * https://docs.oracle.com/javase/8/docs/api/java/util/Set.html
+ * 1. https://docs.oracle.com/javase/8/docs/api/java/util/Set.html
  * toArray()返回 或者是带参数的必须是对象 而不能是int类型
  * toArray()返回的是Object类型
  * 要指定类型要使用toArray(new Integer[0]) 0没有关系 数组会自动allocated
  * 如果知道大小 还是指定size
+ * 2. 一直在避免使用for(int num : nums) 因为最后的结果数据 没有index的增长
+ * 怎么解决，就跟selection sort里一样 只管index 把index作为一个变量 自增
+ * 其实while循环不就是同理吗
  */
 public class SingleNum3 {
   public int[] singleNumber(int[] nums) {
