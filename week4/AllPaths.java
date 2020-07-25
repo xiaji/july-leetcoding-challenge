@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * 第一反应:DFS
+ * 这个解决方案只针对有向图里的单向情况，如果有双向的情况，这个路径长度就可以无限的大
  */
 public class AllPaths {
   public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
