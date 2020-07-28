@@ -4,6 +4,8 @@ package week4;
  * binray tree traversal 基础题目
  * 用inorder来构建 postorder最后一个就是根
  * mistake：不要去找两边各自的分界点，找长度，这样只需要扫描数组一遍
+ * 如果找index，就会遇到数组越界的问题，要分各种情况，最后就会出现错误
+ * 计算左侧的长度最简单，最直接。同时避免了越界的分情况讨论
  */
 public class ConstructBinaryTreeInAndPostOrder {
   public TreeNode buildTree(int[] inorder, int[] postorder) {
