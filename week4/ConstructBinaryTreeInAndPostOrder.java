@@ -6,6 +6,7 @@ package week4;
  * mistake：不要去找两边各自的分界点，找长度，这样只需要扫描数组一遍
  * 如果找index，就会遇到数组越界的问题，要分各种情况，最后就会出现错误
  * 计算左侧的长度最简单，最直接。同时避免了越界的分情况讨论
+ * 时间复杂度是O(N^2)
  */
 public class ConstructBinaryTreeInAndPostOrder {
   public TreeNode buildTree(int[] inorder, int[] postorder) {
@@ -45,4 +46,8 @@ public class ConstructBinaryTreeInAndPostOrder {
     }
     return -1;
   }
+
+  /**
+   * leetcode method
+   */
 }
