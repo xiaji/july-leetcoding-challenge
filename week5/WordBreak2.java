@@ -9,6 +9,7 @@ import java.util.List;
  * subList里存入的是分割出来的单词 如果start == s的长度 那说明分的刚好 可以存入
  * 之后trie，或者说按照int[26]那个方法 可以根据前缀 加速for循环的结束
  * String.join()方法
+ * 需要补充
  */
 public class WordBreak2 {
   public List<String> wordBreak(String s, List<String> wordDict) {
